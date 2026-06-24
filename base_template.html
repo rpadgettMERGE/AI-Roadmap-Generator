@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERGE - Chartwell Proportional Maturity Roadmap Canvas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Strict adherence to MERGE Identity Protocols */
+        :root {
+            --merge-warm-gray: #EAE8E3;
+            --merge-viridian: #00856C;
+            --merge-dark-green: #133B34;
+            --merge-electrolight: #1ED75F;
+            --merge-medium-gray: #636466;
+            --merge-black: #212721;
+        }
+
+        body { 
+            font-family: 'Epilogue', sans-serif; 
+            background-color: var(--merge-warm-gray); 
+            color: var(--merge-black);
+        }
+
+        h1, h2, h3, h4, .serif-brand {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+
+        .small-caps {
+            font-variant: small-caps;
+            letter-spacing: 0.05em;
+        }
+
+        /* Gantt Proportional Container Layout Architecture */
+        .timeline-container-grid {
+            display: grid;
+            grid-template-columns: 240px repeat(24, 50px);
+            gap: 12px 0px;
+        }
+
+        .timeline-column-header {
+            border-left: 1px dashed rgba(19, 59, 52, 0.2);
+            background-color: rgba(255,255,255,0.5);
+            transition: all 0.2s ease;
+        }
+
+        .timeline-column-header:hover {
+            background-color: rgba(0, 133, 108, 0.1);
+        }
+
+        .timeline-column-header.active-header {
+            background-color: rgba(0, 133, 108, 0.15);
+            border-bottom: 2px solid var(--merge-viridian);
+        }
+
+        /* High-Contrast Interactive Milestone Cards */
+        .milestone-bar {
+            font-family: 'Epilogue', sans-serif;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #ffffff;
+            color: var(--merge-black);
+            border-left: 4px solid var(--merge-dark-green);
+            box-shadow: 0 2px 4px rgba(19, 59, 52, 0.05);
+            z-index: 10;
+        }
+
+        .milestone-bar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(19, 59, 52, 0.12);
+            z-index: 20;
+        }
+
+        /* Selection Treatment Modifiers */
+        .dimmed { 
+            opacity: 0.15 !important; 
+            filter: grayscale(90%); 
+        }
+
+        /* Brand-compliant MERGE Electrolight Green active click */
+        .dependency-source { 
+            background-color: var(--merge-electrolight) !important;
+            color: var(--merge-black) !important;
+            border-left-color: var(--merge-viridian) !important; 
+            box-shadow: 0 0 15px rgba(30, 215, 95, 0.6); 
+        }
+
+        .dependency-target { 
+            border: 2px solid var(--merge-viridian) !important;
+            box-shadow: 0 0 0 3px var(--merge-electrolight); 
+        }
+
+        /* Theme Filter Popovers */
+        .theme-tooltip { 
+            visibility: hidden; 
+            opacity: 0; 
+            transition: opacity 0.25s, transform 0.2s; 
+            transform: translateY(6px);
+        }
+        
+        .theme-filter-wrapper:hover .theme-tooltip { 
+            visibility: visible; 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+    </style>
+</head>
+<body class="min-h-screen p-6 md:p-8">
+
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 mb-8 border-b border-gray-300">
+        <div>
+            <div class="flex items-center gap-2 text-xs font-semibold uppercase text-[#133B34] small-caps">
+                <span>MERGE</span> • <span class="text-[#636466]">Built Different</span>
+            </div>
+            <h1 class="text-3xl font-light text-[#00856C] mt-1">Operational Transformation Canvas</h1>
+            <p class="text-xs text-[#636466] mt-0.5 max-w-2xl">A unified, context-aware roadmap engine blending human insight, strategy, and milestone tracking.</p>
+        </div>
+        <div class="mt-4 md:mt-0 bg-[#133B34] text-white px-5 py-2 rounded shadow-sm text-right">
+            <div id="assessment-date-display" class="text-[10px] opacity-75 small-caps font-medium">Strategic Assessment</div>
+            <div id="client-header-name" class="text-sm font-semibold tracking-wide">Roadmap Framework</div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl p-4 mb-8 shadow-sm border border-gray-200">
+        <div class="text-[10px] font-bold uppercase tracking-wider text-[#636466] mb-3 small-caps">
+            <i class="fas fa-sliders-h text-[#133B34] mr-1.5"></i> Hover options for analytics context. Click to isolate timeline paths.
+        </div>
+        <div class="flex flex-wrap gap-3">
+            <button onclick="filterTheme('all')" id="btn-all" class="px-4 py-1.5 rounded text-xs font-medium border border-[#133B34] bg-[#133B34] text-white transition">All Frameworks</button>
+            
+            <div class="relative theme-filter-wrapper">
+                <button onclick="filterTheme('tech')" id="btn-tech" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:bg-gray-50 transition"><i class="fas fa-server mr-1.5 text-[#133B34]"></i> Upgrading the Tech</button>
+                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs">
+                    <strong class="block mb-1 text-[#1ED75F]">Upgrading the Tech:</strong> Data catalog baseline profiling and pipeline consolidation.
+                    <div class="mt-2 pt-2 border-t border-white/10 text-[11px] text-gray-300">
+                        <strong>Target Metrics:</strong> Data sync latency limits, pipeline processing errors, and sunset application counts.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative theme-filter-wrapper">
+                <button onclick="filterTheme('team')" id="btn-team" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:bg-gray-50 transition"><i class="fas fa-users mr-1.5 text-[#133B34]"></i> Getting the Team Ready</button>
+                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs"><strong>Getting the Team Ready:</strong> Resolving ad-hoc execution patterns through structured upskilling runbooks.
+                    <div class="mt-2 pt-2 border-t border-white/10 text-[11px] text-gray-300">
+                        <strong>Target Metrics:</strong> Internal workflow cycle time speeds, runbook adoption rates, and training tracking completions.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative theme-filter-wrapper">
+                <button onclick="filterTheme('gtm')" id="btn-gtm" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:bg-gray-50 transition"><i class="fas fa-bullseye mr-1.5 text-[#133B34]"></i> Hype-Targeted GTM</button>
+                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs"><strong>Hype-Targeted GTM:</strong> Scaling precise, personalized customer marketing journeys and segmentation arrays.
+                    <div class="mt-2 pt-2 border-t border-white/10 text-[11px] text-gray-300">
+                        <strong>Target Metrics:</strong> Dynamic lead acquisition rates, conversion point optimization percentages, and segment retention values.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative theme-filter-wrapper">
+                <button onclick="filterTheme('ai')" id="btn-ai" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:bg-gray-50 transition"><i class="fas fa-robot mr-1.5 text-[#133B34]"></i> The AI Evolution</button>
+                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs"><strong>The AI Evolution:</strong> Testing verification sandboxes and production execution agent models.
+                    <div class="mt-2 pt-2 border-t border-white/10 text-[11px] text-gray-300">
+                        <strong>Target Metrics:</strong> Automated execution volumes, agent accuracy benchmarks, and operational processing velocity tracking.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col xl:flex-row gap-8">
+        
+        <div class="flex-1 overflow-x-auto pb-4">
+            <div class="timeline-container-grid min-w-[1440px]">
+                
+                <div class="p-3 bg-[#133B34] text-white text-xs font-bold uppercase tracking-wider small-caps rounded-l flex items-center justify-between">
+                    <span>Strategic Matrix</span>
+                </div>
+                <button id="header-period-1" onclick="selectPeriod(1)" class="timeline-column-header p-3 text-left font-bold text-xs text-[#133B34] transition border-b border-gray-300" style="grid-column: span 6;">Year 1 - H1 <i class="fas fa-chevron-right text-[9px] text-[#00856C]"></i></button>
+                <button id="header-period-2" onclick="selectPeriod(2)" class="timeline-column-header p-3 text-left font-bold text-xs text-[#133B34] transition border-b border-gray-200" style="grid-column: span 6;">Year 1 - H2 <i class="fas fa-chevron-right text-[9px] text-[#00856C]"></i></button>
+                <button id="header-period-3" onclick="selectPeriod(3)" class="timeline-column-header p-3 text-left font-bold text-xs text-[#133B34] transition border-b border-gray-200" style="grid-column: span 6;">Year 2 - H1 <i class="fas fa-chevron-right text-[9px] text-[#00856C]"></i></button>
+                <button id="header-period-4" onclick="selectPeriod(4)" class="timeline-column-header p-3 text-left font-bold text-xs text-[#133B34] transition border-b border-gray-200" style="grid-column: span 6;">Year 2 - H2 <i class="fas fa-chevron-right text-[9px] text-[#00856C]"></i></button>
+
+                <div class="bg-gray-200/50"></div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M1</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M2</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M3</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M4</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M5</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M6</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M7</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M8</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M9</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M10</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M11</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M12</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M1</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M2</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M3</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M4</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M5</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M6</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M7</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M8</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M9</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M10</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M11</div>
+                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M12</div>
+
+                <div id="proportional-board-rows" class="contents"></div>
+            </div>
+        </div>
+
+        <div class="w-full xl:w-[420px] bg-white border border-gray-200 rounded-xl p-6 shadow-sm h-fit sticky top-6">
+            <div id="detail-panel-root">
+                <div class="text-center py-20 text-[#636466]">
+                    <i class="fas fa-bezier-curve text-4xl text-gray-300 mb-4 block"></i>
+                    <h3 class="text-sm font-semibold text-[#133B34] uppercase tracking-wider small-caps">Workspace Inspector</h3>
+                    <p class="text-xs mt-2 text-gray-400">Select any milestone bar, timeline header column, or strategy track button to reveal specific task requirements.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // =======================================================================
+        // 1. DATA INJECTION ZONE
+        // =======================================================================
+        const parsedData = __INJECT_JSON_HERE__;   
+        
+        // =======================================================================
+        // 2. ENGINE LOGIC
+        // =======================================================================
+        let currentActiveItem = null;
+        let currentActivePeriod = null;
+        let currentActiveTrack = null;
+
+        let proportionalRoadmapData = parsedData.proportionalRoadmapData || [];
+        let businessMaturityPhases = parsedData.businessMaturityPhases || {};
+
+        if(parsedData.clientMetadata) {
+            document.getElementById('client-header-name').textContent = (parsedData.clientMetadata.clientName || 'Client') + " Roadmap Framework";
+            document.getElementById('assessment-date-display').textContent = "Strategic Assessment • " + (parsedData.clientMetadata.assessmentDate || 'TBD');
+        }
+
+        // Render the Gantt Proportional Canvas Engine layout dynamically...
+        function generateMaturityCanvas() {
+            const container = document.getElementById('proportional-board-rows');
+            if(!container) return;
+            let outputHtml = '';
+
+            proportionalRoadmapData.forEach(row => {
+                let items = row.items || [];
+                
+                // --- COLLISION DETECTION & ROW STACKING ALGORITHM ---
+                // Sort items by start slot first
+                items.sort((a, b) => a.startSlot - b.startSlot);
+                
+                let gridRows = []; // Keeps track of occupied months per row
+                items.forEach(m => {
+                    let placed = false;
+                    let start = m.startSlot;
+                    let end = m.startSlot + m.duration - 1;
+                    
+                    // Try to place in an existing row
+                    for (let r = 0; r < gridRows.length; r++) {
+                        let hasOverlap = false;
+                        for (let slot = start; slot <= end; slot++) {
+                            if (gridRows[r][slot]) { hasOverlap = true; break; }
+                        }
+                        if (!hasOverlap) {
+                            m.renderRow = r + 1; // CSS rows are 1-indexed
+                            for (let slot = start; slot <= end; slot++) gridRows[r][slot] = true;
+                            placed = true;
+                            break;
+                        }
+                    }
+                    // If all rows had an overlap, create a new vertical row
+                    if (!placed) {
+                        let newRow = [];
+                        for (let slot = start; slot <= end; slot++) newRow[slot] = true;
+                        gridRows.push(newRow);
+                        m.renderRow = gridRows.length;
+                    }
+                });
+
+                const totalRows = Math.max(1, gridRows.length);
+                // Dynamically expand the track height based on how many stacked items exist
+                const minHeight = Math.max(82, totalRows * 50); 
+                // ----------------------------------------------------
+
+                outputHtml += `
+                    <div class="p-3 bg-white border border-gray-200 rounded flex items-center shadow-sm" style="min-height: ${minHeight}px;">
+                        <button onclick="inspectTrack('${row.id}')" class="w-full text-left font-bold text-xs text-[#133B34] hover:text-[#00856C] transition group flex flex-col justify-center">
+                            <span class="group-hover:underline"><i class="fas fa-folder-open mr-1 text-[#00856C]"></i> ${row.focusName}</span>
+                            <span class="text-[9px] font-normal text-gray-400 mt-1 block tracking-normal uppercase small-caps">View Track Matrix</span>
+                        </button>
+                    </div>
+                `;
+
+                outputHtml += `
+                    <div class="contents" style="grid-column: span 24;">
+                        <div class="grid items-center bg-gray-50/20 border-b border-gray-200 relative py-2" 
+                             style="grid-column: span 24; display: grid; grid-template-columns: repeat(24, 1fr); grid-template-rows: repeat(${totalRows}, 1fr); gap: 8px 0; min-height: ${minHeight}px;">
+                            
+                            <div class="absolute inset-0 grid pointer-events-none" style="grid-template-columns: repeat(24, 1fr);">
+                                ${Array.from({length: 24}).map(() => `<div class="h-full border-l border-gray-200/50"></div>`).join('')}
+                            </div>
+                            
+                            ${items.map(m => {
+                                return `
+                                    <div id="bar-${m.id}" 
+                                         onclick="inspectMilestone('${m.id}')" 
+                                         class="milestone-bar p-2.5 mx-1.5 rounded-lg border-l-4 ${m.borderStyle} flex flex-col justify-center" 
+                                         data-theme="${m.theme}"
+                                         style="grid-row: ${m.renderRow}; grid-column: ${m.startSlot} / span ${m.duration}; height: 100%; min-height: 42px;">
+                                        <div class="font-bold text-[10px] text-[#133B34] tracking-tight truncate leading-tight">${m.name}</div>
+                                        <div class="text-[8px] text-[#636466] mt-1 font-mono flex justify-between items-center opacity-90">
+                                            <span><i class="far fa-clock mr-0.5 text-[9px] text-[#00856C]"></i> ${m.duration}m</span>
+                                            <span class="font-bold bg-[#133B34]/10 text-[#133B34] px-1 rounded text-[7px]">${m.id}</span>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = outputHtml;
+        }
+
+        function filterTheme(themeId) {
+            document.querySelectorAll('.theme-filter-wrapper button, #btn-all').forEach(btn => {
+                btn.classList.remove('bg-[#133B34]', 'text-white');
+                btn.classList.add('bg-white', 'text-[#133B34]');
+            });
+            
+            const activeBtn = document.getElementById(`btn-${themeId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-[#133B34]');
+                activeBtn.classList.add('bg-[#133B34]', 'text-white');
+            }
+
+            document.querySelectorAll('.milestone-bar').forEach(card => {
+                if (themeId === 'all' || card.getAttribute('data-theme') === themeId) {
+                    card.classList.remove('dimmed');
+                } else {
+                    card.classList.add('dimmed');
+                }
+            });
+        }
+
+        function resetInspector() {
+            currentActiveItem = null;
+            currentActivePeriod = null;
+            currentActiveTrack = null;
+            document.querySelectorAll('.milestone-bar').forEach(c => c.classList.remove('dimmed', 'dependency-source', 'dependency-target'));
+            document.querySelectorAll('.timeline-column-header').forEach(h => h.classList.remove('active-header', 'bg-emerald-500/10'));
+            
+            const rootPanel = document.getElementById('detail-panel-root');
+            rootPanel.innerHTML = `
+                <div class="text-center py-20 text-[#636466]">
+                    <i class="fas fa-bezier-curve text-4xl text-gray-300 mb-4 block"></i>
+                    <h3 class="text-sm font-semibold text-[#133B34] uppercase tracking-wider small-caps">Workspace Inspector</h3>
+                    <p class="text-xs mt-2 text-gray-400">Select any milestone bar, timeline header column, or strategy track button to reveal specific task requirements.</p>
+                </div>
+            `;
+        }
+
+        function inspectMilestone(targetId) {
+            if (currentActiveItem === targetId) { resetInspector(); return; }
+            
+            currentActiveItem = targetId;
+            currentActivePeriod = null;
+            currentActiveTrack = null;
+            
+            document.querySelectorAll('.timeline-column-header').forEach(h => h.classList.remove('active-header', 'bg-emerald-500/10'));
+            document.querySelectorAll('.milestone-bar').forEach(c => c.classList.remove('dimmed', 'dependency-source', 'dependency-target'));
+
+            let selectedNode = null;
+            proportionalRoadmapData.forEach(r => {
+                const match = (r.items || []).find(m => m.id === targetId);
+                if (match) selectedNode = match;
+            });
+
+            if (!selectedNode) return;
+
+            document.getElementById(`bar-${targetId}`).classList.add('dependency-source');
+            document.querySelectorAll('.milestone-bar').forEach(card => {
+                const innerId = card.id.replace('bar-', '');
+                if (innerId !== targetId && !(selectedNode.deps || []).includes(innerId)) {
+                    card.classList.add('dimmed');
+                } else if ((selectedNode.deps || []).includes(innerId)) {
+                    card.classList.add('dependency-target');
+                }
+            });
+
+            const subtaskElements = (selectedNode.subtasks || []).map(task => {
+                return `<li class="flex items-start gap-2 text-xs text-[#212721] font-medium bg-gray-50 p-2.5 rounded border border-gray-200">
+                    <i class="fas fa-angle-right text-[#00856C] mt-0.5"></i>
+                    <span>${task}</span>
+                </li>`;
+            }).join('');
+
+            const dependencyItems = (selectedNode.deps || []).map(depId => {
+                return `<li class="flex items-center gap-2 text-rose-700 font-semibold bg-rose-50 p-2 rounded border border-rose-200">
+                    <i class="fas fa-link text-[#00856C]"></i> Cannot finalize until milestone [${depId}] concludes.
+                </li>`;
+            }).join('');
+
+            const startMonth = selectedNode.startSlot;
+            const endMonth = selectedNode.startSlot + selectedNode.duration - 1;
+
+            const rootPanel = document.getElementById('detail-panel-root');
+            rootPanel.innerHTML = `
+                <div class="border-b border-gray-200 pb-4 mb-4 flex justify-between items-start">
+                    <div>
+                        <div class="text-[9px] uppercase font-bold tracking-wider text-[#00856C] small-caps mb-0.5">Milestone Requirements</div>
+                        <h2 class="text-xl text-[#133B34] font-medium leading-tight">${selectedNode.name}</h2>
+                    </div>
+                    <button onclick="resetInspector()" class="text-xs bg-gray-100 hover:bg-gray-200 text-[#133B34] px-2 py-1 rounded border border-gray-300 transition">
+                        <i class="fas fa-times-circle text-[#00856C] mr-1"></i> Close
+                    </button>
+                </div>
+
+                <div class="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 small-caps">Functional Objective Focus</h4>
+                    <p class="text-xs text-[#636466] leading-relaxed font-medium">${selectedNode.desc}</p>
+                </div>
+
+                <div class="text-xs text-[#636466] mb-4 font-medium flex gap-4 bg-white p-2 rounded border border-gray-200">
+                    <span><i class="far fa-clock mr-1 text-gray-400"></i> Active: <span class="text-[#00856C] font-bold">${selectedNode.duration} Months</span></span>
+                    <span><i class="far fa-calendar-alt mr-1 text-gray-400"></i> Timeline: <span class="text-amber-600 font-bold">M${startMonth} → M${endMonth}</span></span>
+                </div>
+
+                <div class="mb-5 bg-[#133B34]/5 p-4 rounded-xl border border-[#00856C]/20">
+                    <h4 class="text-[10px] font-bold text-[#133B34] uppercase tracking-wider mb-3 small-caps"><i class="fas fa-tasks text-[#00856C] mr-1"></i> Essential Project Tasks</h4>
+                    <ul class="space-y-2">${subtaskElements || '<span class="text-gray-400 italic">No specific subtasks mapped.</span>'}</ul>
+                </div>
+
+                <div>
+                    <h4 class="text-[10px] font-bold text-[#133B34] uppercase tracking-wider mb-2 small-caps"><i class="fas fa-project-diagram text-[#00856C] mr-1"></i> Execution Blocker Criteria</h4>
+                    ${(selectedNode.deps || []).length > 0 ? `<ul class="space-y-2 text-xs">${dependencyItems}</ul>` : `<p class="text-xs text-gray-400 italic bg-gray-50 p-3 rounded text-center border border-dashed">No active cross-functional blockers identified for this track path.</p>`}
+                </div>
+            `;
+        }
+
+        function selectPeriod(periodId) {
+            if (currentActivePeriod === periodId) { resetInspector(); return; }
+
+            currentActivePeriod = periodId;
+            currentActiveItem = null;
+            currentActiveTrack = null;
+
+            document.querySelectorAll('.milestone-bar').forEach(c => c.classList.remove('dimmed', 'dependency-source', 'dependency-target'));
+            document.querySelectorAll('.timeline-column-header').forEach(h => h.classList.remove('active-header', 'bg-emerald-500/10'));
+            
+            document.getElementById(`header-period-${periodId}`).classList.add('active-header', 'bg-emerald-500/10');
+            
+            const dataPhase = businessMaturityPhases[periodId] || { text: "No summary provided for this phase." };
+            const startRange = ((periodId - 1) * 6) + 1;
+            const endRange = periodId * 6;
+            const periodItems = [];
+
+            proportionalRoadmapData.forEach(r => {
+                (r.items || []).forEach(m => {
+                    if (m.startSlot >= startRange && m.startSlot <= endRange) {
+                        periodItems.push({ track: r.focusName, ...m });
+                    }
+                });
+            });
+
+            const rootPanel = document.getElementById('detail-panel-root');
+            rootPanel.innerHTML = `
+                <div class="bg-[#133B34] text-white p-4 rounded-lg mb-5 shadow-md flex justify-between items-center">
+                    <div>
+                        <div class="text-[9px] uppercase tracking-widest text-[#1ED75F] font-bold small-caps mb-0.5">Timeline Segment</div>
+                        <h2 class="text-xl font-medium tracking-tight">Transformation Status</h2>
+                    </div>
+                    <button onclick="resetInspector()" class="text-xs bg-white/10 hover:bg-white/20 text-white px-2 py-1 rounded border border-white/20 transition">
+                        <i class="fas fa-times-circle text-[#1ED75F] mr-1"></i> Reset
+                    </button>
+                </div>
+
+                <div class="mb-5 text-xs text-[#636466] leading-relaxed bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    "${dataPhase.text}"
+                </div>
+
+                <div>
+                    <h4 class="text-[10px] font-bold text-[#133B34] uppercase tracking-wider mb-3 small-caps"><i class="fas fa-clipboard-list text-[#00856C] mr-1"></i> Active Period Tasks Matrix</h4>
+                    <div class="space-y-3 max-h-[280px] overflow-y-auto pr-1">
+                        ${periodItems.map(item => `
+                            <div class="p-3 bg-white border border-gray-200 rounded-lg shadow-sm">
+                                <div class="text-[9px] font-bold text-gray-400 uppercase small-caps mb-1">${item.track}</div>
+                                <div class="text-xs font-semibold text-[#133B34] mb-2">${item.name}</div>
+                                <div class="pl-2 border-l-2 border-[#00856C] space-y-1.5">
+                                    ${(item.subtasks || []).map(t => `<div class="text-[11px] text-[#212721] font-medium flex items-start gap-1"><i class="fas fa-angle-right text-[#00856C] text-[10px] mt-0.5"></i> <span>${t}</span></div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function inspectTrack(trackId) {
+            if (currentActiveTrack === trackId) { resetInspector(); return; }
+
+            currentActiveTrack = trackId;
+            currentActiveItem = null;
+            currentActivePeriod = null;
+
+            document.querySelectorAll('.timeline-column-header').forEach(h => h.classList.remove('active-header', 'bg-emerald-500/10'));
+            document.querySelectorAll('.milestone-bar').forEach(c => c.classList.remove('dimmed', 'dependency-source', 'dependency-target'));
+
+            const selectedTrack = proportionalRoadmapData.find(t => t.id === trackId);
+            if (!selectedTrack) return;
+
+            document.querySelectorAll('.milestone-bar').forEach(card => {
+                if (!(selectedTrack.items || []).some(i => `bar-${i.id}` === card.id)) {
+                    card.classList.add('dimmed');
+                }
+            });
+
+            const rootPanel = document.getElementById('detail-panel-root');
+            rootPanel.innerHTML = `
+                <div class="border-b border-gray-200 pb-4 mb-4 flex justify-between items-start">
+                    <div>
+                        <div class="text-[9px] uppercase font-bold tracking-wider text-[#00856C] small-caps mb-0.5">Strategy Track View</div>
+                        <h2 class="text-xl text-[#133B34] font-medium leading-tight">${selectedTrack.focusName}</h2>
+                    </div>
+                    <button onclick="resetInspector()" class="text-xs bg-gray-100 hover:bg-gray-200 text-[#133B34] px-2 py-1 rounded border border-gray-300 transition">
+                        <i class="fas fa-times-circle text-[#00856C] mr-1"></i> Close
+                    </button>
+                </div>
+                
+                <p class="text-xs text-[#636466] leading-relaxed mb-5 bg-gray-50 p-3 rounded border border-gray-200">${selectedTrack.trackDesc}</p>
+
+                <h4 class="text-[10px] font-bold text-[#133B34] uppercase tracking-wider mb-3 small-caps"><i class="fas fa-stream text-[#00856C] mr-1"></i> Full Track Tasks Rollup</h4>
+                <div class="space-y-4 max-h-[300px] overflow-y-auto pr-1">
+                    ${(selectedTrack.items || []).map(item => `
+                        <div class="p-3 bg-white border border-gray-100 rounded-lg shadow-sm border-l-4 ${item.borderStyle}">
+                            <div class="text-xs font-bold text-[#133B34] flex justify-between">
+                                <span>${item.name}</span>
+                                <span class="text-[9px] font-mono text-gray-400">${item.id}</span>
+                            </div>
+                            <ul class="mt-2 space-y-1.5 border-t pt-2 border-gray-100">
+                                ${(item.subtasks || []).map(t => `<li class="text-[11px] text-[#212721] font-medium flex items-start gap-1.5"><i class="fas fa-angle-right text-[#00856C] text-[10px] mt-0.5"></i> <span>${t}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        generateMaturityCanvas();
+    </script>
+</body>
+</html>
