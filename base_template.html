@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MERGE - Chartwell Proportional Maturity Roadmap Canvas</title>
+    <title>MERGE - Operational Transformation Canvas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&display=swap" rel="stylesheet">
     
     <style>
-        /* Strict adherence to MERGE Identity Protocols */
+        /* Strict Adherence to MERGE Brand Guidelines */
         :root {
             --merge-warm-gray: #EAE8E3;
             --merge-viridian: #00856C;
@@ -36,35 +36,43 @@
             letter-spacing: 0.05em;
         }
 
-        /* Gantt Proportional Container Layout Architecture */
         .timeline-container-grid {
             display: grid;
-            grid-template-columns: 240px repeat(24, 50px);
             gap: 12px 0px;
         }
 
+        /* --- UPDATED HEADER STYLING --- */
         .timeline-column-header {
-            border-left: 1px dashed rgba(19, 59, 52, 0.2);
-            background-color: rgba(255,255,255,0.5);
+            background-color: #ffffff;
+            color: var(--merge-dark-green);
+            border-left: 1px solid var(--merge-warm-gray);
             transition: all 0.2s ease;
         }
 
         .timeline-column-header:hover {
-            background-color: rgba(0, 133, 108, 0.1);
+            background-color: #f5f5f5;
         }
 
         .timeline-column-header.active-header {
-            background-color: rgba(0, 133, 108, 0.15);
-            border-bottom: 2px solid var(--merge-viridian);
+            background-color: var(--merge-dark-green) !important;
+            color: #ffffff !important;
+            border-bottom: 2px solid var(--merge-electrolight) !important;
+        }
+        
+        .timeline-column-header .header-icon {
+            color: var(--merge-viridian);
+        }
+        
+        .timeline-column-header.active-header .header-icon {
+            color: var(--merge-electrolight) !important;
         }
 
-        /* High-Contrast Interactive Milestone Cards */
         .milestone-bar {
             font-family: 'Epilogue', sans-serif;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
             background-color: #ffffff;
             color: var(--merge-black);
-            border-left: 4px solid var(--merge-dark-green);
+            border-left: 4px solid var(--merge-dark-green) !important;
             box-shadow: 0 2px 4px rgba(19, 59, 52, 0.05);
             z-index: 10;
         }
@@ -75,26 +83,44 @@
             z-index: 20;
         }
 
-        /* Selection Treatment Modifiers */
         .dimmed { 
             opacity: 0.15 !important; 
             filter: grayscale(90%); 
         }
 
-        /* Brand-compliant MERGE Electrolight Green active click */
         .dependency-source { 
-            background-color: var(--merge-electrolight) !important;
-            color: var(--merge-black) !important;
-            border-left-color: var(--merge-viridian) !important; 
-            box-shadow: 0 0 15px rgba(30, 215, 95, 0.6); 
+            background-color: var(--merge-dark-green) !important;
+            border: 2px solid var(--merge-electrolight) !important;
+            border-left-width: 6px !important;
+            box-shadow: 0 4px 14px rgba(30, 215, 95, 0.2);
+            color: #ffffff !important;
+        }
+        
+        /* Ensure text inside the selected block turns white */
+        .dependency-source .milestone-title {
+            color: #ffffff !important;
+        }
+        .dependency-source .milestone-meta {
+            color: var(--merge-warm-gray) !important;
+            opacity: 0.85 !important;
         }
 
         .dependency-target { 
-            border: 2px solid var(--merge-viridian) !important;
-            box-shadow: 0 0 0 3px var(--merge-electrolight); 
+            background-color: var(--merge-electrolight) !important;
+            border: 1px solid var(--merge-dark-green) !important;
+            border-left-width: 4px !important;
+            box-shadow: 0 4px 12px rgba(30, 215, 95, 0.3) !important;
+        }
+        
+        /* Ensure text inside the lime green dependency blocks stays dark/legible */
+        .dependency-target .milestone-title {
+            color: var(--merge-dark-green) !important;
+        }
+        .dependency-target .milestone-meta {
+            color: var(--merge-dark-green) !important;
+            opacity: 0.85 !important;
         }
 
-        /* Theme Filter Popovers */
         .theme-tooltip { 
             visibility: hidden; 
             opacity: 0; 
@@ -107,21 +133,37 @@
             opacity: 1; 
             transform: translateY(0); 
         }
+
+        .grid-tick-line {
+            border-left: 1px solid rgba(99, 100, 102, 0.15);
+            height: 100%;
+            width: 100%;
+        }
     </style>
 </head>
 <body class="min-h-screen p-6 md:p-8">
 
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 mb-8 border-b border-gray-300">
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center pb-6 mb-8 border-b border-gray-300 gap-6">
         <div>
             <div class="flex items-center gap-2 text-xs font-semibold uppercase text-[#133B34] small-caps">
                 <span>MERGE</span> • <span class="text-[#636466]">Built Different</span>
             </div>
             <h1 class="text-3xl font-light text-[#00856C] mt-1">Operational Transformation Canvas</h1>
-            <p class="text-xs text-[#636466] mt-0.5 max-w-2xl">A unified, context-aware roadmap engine blending human insight, strategy, and milestone tracking.</p>
+            <p class="text-xs text-[#636466] mt-0.5 max-w-2xl">A marketing and technology agency built for the intersection of health and wellness, powered by human insight, creativity, and AI.</p>
         </div>
-        <div class="mt-4 md:mt-0 bg-[#133B34] text-white px-5 py-2 rounded shadow-sm text-right">
-            <div id="assessment-date-display" class="text-[10px] opacity-75 small-caps font-medium">Strategic Assessment</div>
-            <div id="client-header-name" class="text-sm font-semibold tracking-wide">Roadmap Framework</div>
+        
+        <div class="flex gap-4 self-end lg:self-auto">
+            <div class="bg-white rounded-xl p-4 border border-gray-200 shadow-sm min-w-[140px]">
+                <div class="text-[9px] uppercase font-bold text-[#636466] tracking-wider small-caps">Total Workload</div>
+                <div id="global-fte-value" class="text-2xl font-bold text-[#133B34] mt-0.5">0 hrs</div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-gray-200 shadow-sm min-w-[180px]">
+                <div class="text-[9px] uppercase font-bold text-[#636466] tracking-wider small-caps">3 Year Investment</div>
+                <div id="global-portfolio-value" class="text-2xl font-bold text-[#133B34] mt-0.5">$0.0M</div>
+            </div>
+            <div class="bg-[#133B34] text-white px-5 py-4 rounded-xl shadow-sm text-right min-w-[200px] flex flex-col justify-center">
+                <div id="client-header-name" class="text-sm font-semibold tracking-wide mt-0.5">Roadmap Framework</div>
+            </div>
         </div>
     </div>
 
@@ -130,41 +172,52 @@
             <i class="fas fa-sliders-h text-[#133B34] mr-1.5"></i> Hover options for analytics context. Click to isolate timeline paths.
         </div>
         <div class="flex flex-wrap gap-3">
-            <button onclick="filterTheme('all')" id="btn-all" class="px-4 py-1.5 rounded text-xs font-medium border border-[#133B34] bg-[#133B34] text-white transition">All Frameworks</button>
+            <button onclick="filterTheme('all')" id="btn-all" class="px-4 py-1.5 rounded text-xs font-medium border border-[#133B34] bg-[#133B34] text-white hover:opacity-80 transition">All Strategic Pillars</button>
             
             <div class="relative theme-filter-wrapper">
-                <button onclick="filterTheme('tech')" id="btn-tech" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:bg-gray-50 transition"><i class="fas fa-server mr-1.5 text-[#133B34]"></i> Upgrading the Tech</button>
-                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs">
-                    <strong class="block mb-1 text-[#1ED75F]">Upgrading the Tech:</strong> Data catalog baseline profiling and pipeline consolidation.
-                    <div class="mt-2 pt-2 border-t border-white/10 text-[11px] text-gray-300">
-                        <strong>Target Metrics:</strong> Data sync latency limits, pipeline processing errors, and sunset application counts.
+                <button onclick="filterTheme('standards')" id="btn-standards" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:opacity-80 transition"><i class="fas fa-gavel mr-1.5"></i> Governance & Standards</button>
+                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs space-y-2 leading-relaxed">
+                    <div><strong class="text-[#1ED75F] uppercase tracking-wide text-[10px] block mb-0.5">What it is:</strong> The strict boundaries, security rules, and data schemas that keep the business safe.</div>
+                    <div class="pt-1.5 border-t border-white/10 text-[11px] text-gray-300 font-mono">
+                        • Clean Data Rate: X%<br>
+                        • Searchability Score: >X%<br>
+                        • System Setup Success: X%
                     </div>
                 </div>
             </div>
             
             <div class="relative theme-filter-wrapper">
-                <button onclick="filterTheme('team')" id="btn-team" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:bg-gray-50 transition"><i class="fas fa-users mr-1.5 text-[#133B34]"></i> Getting the Team Ready</button>
-                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs"><strong>Getting the Team Ready:</strong> Resolving ad-hoc execution patterns through structured upskilling runbooks.
-                    <div class="mt-2 pt-2 border-t border-white/10 text-[11px] text-gray-300">
-                        <strong>Target Metrics:</strong> Internal workflow cycle time speeds, runbook adoption rates, and training tracking completions.
+                <button onclick="filterTheme('automation')" id="btn-automation" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:opacity-80 transition"><i class="fas fa-cogs mr-1.5"></i> Automation</button>
+                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs space-y-2 leading-relaxed">
+                    <div><strong class="text-[#1ED75F] uppercase tracking-wide text-[10px] block mb-0.5">What it is:</strong> The mechanical software integrations, API data bridges, and custom AI tools that execute tasks instantly.</div>
+                    <div class="pt-1.5 border-t border-white/10 text-[11px] text-gray-300 font-mono">
+                        • Process Speed: X%-X% Faster<br>
+                        • Hours Saved: >X hrs/wk<br>
+                        • Content Leverage: Xx Versions
                     </div>
                 </div>
             </div>
             
             <div class="relative theme-filter-wrapper">
-                <button onclick="filterTheme('gtm')" id="btn-gtm" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:bg-gray-50 transition"><i class="fas fa-bullseye mr-1.5 text-[#133B34]"></i> Hype-Targeted GTM</button>
-                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs"><strong>Hype-Targeted GTM:</strong> Scaling precise, personalized customer marketing journeys and segmentation arrays.
-                    <div class="mt-2 pt-2 border-t border-white/10 text-[11px] text-gray-300">
-                        <strong>Target Metrics:</strong> Dynamic lead acquisition rates, conversion point optimization percentages, and segment retention values.
+                <button onclick="filterTheme('measurement')" id="btn-measurement" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:opacity-80 transition"><i class="fas fa-chart-line mr-1.5"></i> Measurement</button>
+                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs space-y-2 leading-relaxed">
+                    <div><strong class="text-[#1ED75F] uppercase tracking-wide text-[10px] block mb-0.5">What it is:</strong> The live data dashboards, audit checkpoints, and tracking metrics that show how the system is actually performing.</div>
+                    <div class="pt-1.5 border-t border-white/10 text-[11px] text-gray-300 font-mono">
+                        • Recycling Rate: Target >X%<br>
+                        • Workload Balance: ±X% Variance<br>
+                        • Dashboard Coverage: X% Live Data
                     </div>
                 </div>
             </div>
             
             <div class="relative theme-filter-wrapper">
-                <button onclick="filterTheme('ai')" id="btn-ai" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:bg-gray-50 transition"><i class="fas fa-robot mr-1.5 text-[#133B34]"></i> The AI Evolution</button>
-                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs"><strong>The AI Evolution:</strong> Testing verification sandboxes and production execution agent models.
-                    <div class="mt-2 pt-2 border-t border-white/10 text-[11px] text-gray-300">
-                        <strong>Target Metrics:</strong> Automated execution volumes, agent accuracy benchmarks, and operational processing velocity tracking.
+                <button onclick="filterTheme('change')" id="btn-change" class="px-4 py-1.5 rounded text-xs font-medium border border-gray-300 bg-white text-[#133B34] hover:opacity-80 transition"><i class="fas fa-sync-alt mr-1.5"></i> Change Management</button>
+                <div class="theme-tooltip absolute z-50 top-full left-0 mt-2 w-72 bg-[#133B34] text-white p-4 rounded-lg shadow-xl text-xs space-y-2 leading-relaxed">
+                    <div><strong class="text-[#1ED75F] uppercase tracking-wide text-[10px] block mb-0.5">What it is:</strong> The deliberate human training, onboarding, and restructuring required to change your team's day-to-day work habits.</div>
+                    <div class="pt-1.5 border-t border-white/10 text-[11px] text-gray-300 font-mono">
+                        • Tool Adoption: >X% in 60 Days<br>
+                        • Process Discipline: >X% Official Intake<br>
+                        • Problem-Solving Speed: X% Sorted Locally
                     </div>
                 </div>
             </div>
@@ -172,45 +225,14 @@
     </div>
 
     <div class="flex flex-col xl:flex-row gap-8">
-        
         <div class="flex-1 overflow-x-auto pb-4">
-            <div class="timeline-container-grid min-w-[1440px]">
+            
+            <div id="main-timeline-grid" class="timeline-container-grid">
                 
-                <div class="p-3 bg-[#133B34] text-white text-xs font-bold uppercase tracking-wider small-caps rounded-l flex items-center justify-between">
-                    <span>Strategic Matrix</span>
-                </div>
-                <button id="header-period-1" onclick="selectPeriod(1)" class="timeline-column-header p-3 text-left font-bold text-xs text-[#133B34] transition border-b border-gray-300" style="grid-column: span 6;">Year 1 - H1 <i class="fas fa-chevron-right text-[9px] text-[#00856C]"></i></button>
-                <button id="header-period-2" onclick="selectPeriod(2)" class="timeline-column-header p-3 text-left font-bold text-xs text-[#133B34] transition border-b border-gray-200" style="grid-column: span 6;">Year 1 - H2 <i class="fas fa-chevron-right text-[9px] text-[#00856C]"></i></button>
-                <button id="header-period-3" onclick="selectPeriod(3)" class="timeline-column-header p-3 text-left font-bold text-xs text-[#133B34] transition border-b border-gray-200" style="grid-column: span 6;">Year 2 - H1 <i class="fas fa-chevron-right text-[9px] text-[#00856C]"></i></button>
-                <button id="header-period-4" onclick="selectPeriod(4)" class="timeline-column-header p-3 text-left font-bold text-xs text-[#133B34] transition border-b border-gray-200" style="grid-column: span 6;">Year 2 - H2 <i class="fas fa-chevron-right text-[9px] text-[#00856C]"></i></button>
-
-                <div class="bg-gray-200/50"></div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M1</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M2</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M3</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M4</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M5</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M6</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M7</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M8</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M9</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M10</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M11</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M12</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M1</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M2</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M3</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M4</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M5</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M6</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M7</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M8</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M9</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M10</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M11</div>
-                <div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200">M12</div>
+                <div id="dynamic-timeline-header" class="contents"></div>
 
                 <div id="proportional-board-rows" class="contents"></div>
+                
             </div>
         </div>
 
@@ -229,98 +251,191 @@
         // =======================================================================
         // 1. DATA INJECTION ZONE
         // =======================================================================
-        const parsedData = __INJECT_JSON_HERE__;   
-        
-        // =======================================================================
-        // 2. ENGINE LOGIC
-        // =======================================================================
+        const parsedData = __INJECT_JSON_HERE__;
+
         let currentActiveItem = null;
         let currentActivePeriod = null;
         let currentActiveTrack = null;
 
         let proportionalRoadmapData = parsedData.proportionalRoadmapData || [];
-        let businessMaturityPhases = parsedData.businessMaturityPhases || {};
 
+        // Apply dynamic metadata
         if(parsedData.clientMetadata) {
             document.getElementById('client-header-name').textContent = (parsedData.clientMetadata.clientName || 'Client') + " Roadmap Framework";
-            document.getElementById('assessment-date-display').textContent = "Strategic Assessment • " + (parsedData.clientMetadata.assessmentDate || 'TBD');
+            // Removed "Strategic Assessment" Date header based on team feedback
         }
 
-        // Render the Gantt Proportional Canvas Engine layout dynamically...
+        function parseFinance(val) {
+            if (!val) return 0;
+            if (typeof val === 'number') return val;
+            return parseInt(String(val).replace(/[^0-9.-]+/g, "")) || 0;
+        }
+
+        // --- Calculate Max Months Dynamically ---
+        let maxMonth = 24; 
+        proportionalRoadmapData.forEach(row => {
+            (row.items || []).forEach(m => {
+                const endMonth = (parseFinance(m.startSlot) || 1) + (parseFinance(m.duration) || 1) - 1;
+                if (endMonth > maxMonth) {
+                    maxMonth = endMonth;
+                }
+            });
+        });
+        maxMonth = Math.ceil(maxMonth / 6) * 6;
+
+        // --- Calculate Total Investment Value & FTE Dynamically ---
+        let globalMinCost = 0;
+        let globalMaxCost = 0;
+        let globalFte = 0;
+        
+        proportionalRoadmapData.forEach(row => {
+            (row.items || []).forEach(m => {
+                globalMinCost += parseFinance(m.minCost);
+                globalMaxCost += parseFinance(m.maxCost);
+                globalFte += parseFinance(m.fteHours);
+            });
+        });
+        
+        // Helper function to format Millions ($1.2M) or Thousands ($500k)
+        function formatMoney(amount) {
+            if (amount >= 1000000) {
+                return '$' + (amount / 1000000).toFixed(1) + 'M';
+            } else if (amount > 0) {
+                return '$' + (amount / 1000).toFixed(0) + 'k';
+            }
+            return '$0';
+        }
+
+        if (globalMaxCost > 0) {
+            document.getElementById('global-portfolio-value').textContent = formatMoney(globalMinCost) + ' - ' + formatMoney(globalMaxCost);
+            // Adjusts font size slightly so the range fits nicely in the box
+            document.getElementById('global-portfolio-value').classList.replace('text-2xl', 'text-xl'); 
+        } else {
+            document.getElementById('global-portfolio-value').textContent = 'TBD';
+        }
+        
+        document.getElementById('global-fte-value').textContent = globalFte.toLocaleString() + ' hrs';
+
+        // --- Calculate Dependencies Dynamically based on CSV injection ---
+        const upstreamLinkRegistry = {};
+        proportionalRoadmapData.forEach(row => {
+            (row.items || []).forEach(m => {
+                if (m.deps && m.deps.length > 0) {
+                    upstreamLinkRegistry[m.id] = m.deps;
+                }
+            });
+        });
+
+        const businessMaturityPhases = {
+            1: { text: "Phase 1: Foundation & Alignment — By the end of this phase, the organization will have established a clear, unified operational blueprint." },
+            2: { text: "Phase 2: Core Deployment & Integration — By month twelve, the company will have successfully transitioned from strategic planning to active technical execution." },
+            3: { text: "Phase 3: Data-Driven Performance Scaling — At this milestone, the organization will operate as a highly synchronized, data-driven engine." },
+            4: { text: "Phase 4: Intelligent Automation & Autonomous Operations — The company will achieve true market leadership by entering the era of fully autonomous operations." }
+        };
+
+        function generateTimelineHeaders() {
+            document.getElementById('main-timeline-grid').style.gridTemplateColumns = `240px repeat(${maxMonth}, 50px)`;
+            
+            const headerContainer = document.getElementById('dynamic-timeline-header');
+            let headerHtml = `
+                <div class="p-3 bg-[#133B34] text-white text-xs font-bold uppercase tracking-wider small-caps rounded-l flex items-center justify-between" style="grid-column: 1; grid-row: 1 / span 2;">
+                    <span>Timeline</span>
+                </div>
+            `;
+            
+            for (let i = 0; i < maxMonth / 6; i++) {
+                const year = Math.floor(i / 2) + 1;
+                const half = (i % 2) + 1;
+                const periodId = i + 1;
+                headerHtml += `<button id="header-period-${periodId}" onclick="selectPeriod(${periodId})" class="timeline-column-header p-3 text-left font-bold text-xs transition border-b border-gray-300" style="grid-column: span 6; grid-row: 1;">Year ${year} - H${half} <i class="fas fa-chevron-right text-[9px] header-icon ml-1"></i></button>`;
+            }
+
+            headerHtml += `<div class="bg-gray-200/50" style="grid-column: 1; grid-row: 2;"></div>`; 
+            for (let i = 1; i <= maxMonth; i++) {
+                headerHtml += `<div class="text-[9px] text-center text-gray-400 font-mono py-1 border-l border-gray-200" style="grid-row: 2;">M${i}</div>`;
+            }
+
+            headerContainer.innerHTML = headerHtml;
+        }
+
         function generateMaturityCanvas() {
             const container = document.getElementById('proportional-board-rows');
-            if(!container) return;
             let outputHtml = '';
+
+            let gridTickLinesHtml = '';
+            for(let i=0; i<maxMonth; i++) {
+                gridTickLinesHtml += '<div class="grid-tick-line"></div>';
+            }
 
             proportionalRoadmapData.forEach(row => {
                 let items = row.items || [];
                 
-                // --- COLLISION DETECTION & ROW STACKING ALGORITHM ---
-                // Sort items by start slot first
-                items.sort((a, b) => a.startSlot - b.startSlot);
+                items.sort((a, b) => parseFinance(a.startSlot) - parseFinance(b.startSlot));
+                let visualRows = []; 
                 
-                let gridRows = []; // Keeps track of occupied months per row
                 items.forEach(m => {
-                    let placed = false;
-                    let start = m.startSlot;
-                    let end = m.startSlot + m.duration - 1;
+                    let assigned = false;
+                    let start = parseFinance(m.startSlot) || 1;
+                    let duration = parseFinance(m.duration) || 1;
+                    let end = start + duration - 1;
                     
-                    // Try to place in an existing row
-                    for (let r = 0; r < gridRows.length; r++) {
+                    for (let r = 0; r < visualRows.length; r++) {
                         let hasOverlap = false;
                         for (let slot = start; slot <= end; slot++) {
-                            if (gridRows[r][slot]) { hasOverlap = true; break; }
+                            if (visualRows[r][slot]) { hasOverlap = true; break; }
                         }
                         if (!hasOverlap) {
-                            m.renderRow = r + 1; // CSS rows are 1-indexed
-                            for (let slot = start; slot <= end; slot++) gridRows[r][slot] = true;
-                            placed = true;
+                            m.renderVerticalRow = r + 1;
+                            for (let slot = start; slot <= end; slot++) visualRows[r][slot] = true;
+                            assigned = true;
                             break;
                         }
                     }
-                    // If all rows had an overlap, create a new vertical row
-                    if (!placed) {
-                        let newRow = [];
+                    if (!assigned) {
+                        let newRow = Array(maxMonth + 2).fill(false);
                         for (let slot = start; slot <= end; slot++) newRow[slot] = true;
-                        gridRows.push(newRow);
-                        m.renderRow = gridRows.length;
+                        visualRows.push(newRow);
+                        m.renderVerticalRow = visualRows.length;
                     }
                 });
 
-                const totalRows = Math.max(1, gridRows.length);
-                // Dynamically expand the track height based on how many stacked items exist
-                const minHeight = Math.max(82, totalRows * 50); 
-                // ----------------------------------------------------
+                const totalVerticalRows = Math.max(1, visualRows.length);
+                const computedTrackHeight = Math.max(82, totalVerticalRows * 54); 
 
                 outputHtml += `
-                    <div class="p-3 bg-white border border-gray-200 rounded flex items-center shadow-sm" style="min-height: ${minHeight}px;">
+                    <div class="p-3 bg-white border border-gray-200 rounded flex items-center shadow-sm" style="grid-column: 1; min-height: ${computedTrackHeight}px;">
                         <button onclick="inspectTrack('${row.id}')" class="w-full text-left font-bold text-xs text-[#133B34] hover:text-[#00856C] transition group flex flex-col justify-center">
                             <span class="group-hover:underline"><i class="fas fa-folder-open mr-1 text-[#00856C]"></i> ${row.focusName}</span>
-                            <span class="text-[9px] font-normal text-gray-400 mt-1 block tracking-normal uppercase small-caps">View Track Matrix</span>
+                            <span class="text-[9px] font-normal text-gray-400 mt-1 block tracking-normal uppercase small-caps">View Track Financial Matrix</span>
                         </button>
                     </div>
                 `;
 
                 outputHtml += `
-                    <div class="contents" style="grid-column: span 24;">
-                        <div class="grid items-center bg-gray-50/20 border-b border-gray-200 relative py-2" 
-                             style="grid-column: span 24; display: grid; grid-template-columns: repeat(24, 1fr); grid-template-rows: repeat(${totalRows}, 1fr); gap: 8px 0; min-height: ${minHeight}px;">
+                    <div class="contents" style="grid-column: span ${maxMonth};">
+                        <div class="relative border-b border-gray-200 bg-gray-50/20 py-2" 
+                             style="grid-column: span ${maxMonth}; display: grid; grid-template-columns: repeat(${maxMonth}, 50px); grid-template-rows: repeat(${totalVerticalRows}, 1fr); gap: 6px 0; min-height: ${computedTrackHeight}px;">
                             
-                            <div class="absolute inset-0 grid pointer-events-none" style="grid-template-columns: repeat(24, 1fr);">
-                                ${Array.from({length: 24}).map(() => `<div class="h-full border-l border-gray-200/50"></div>`).join('')}
+                            <div class="absolute inset-0 grid pointer-events-none z-0" style="grid-template-columns: repeat(${maxMonth}, 50px);">
+                                ${gridTickLinesHtml}
                             </div>
                             
                             ${items.map(m => {
+                                const startPos = parseFinance(m.startSlot) || 1;
+                                const dur = parseFinance(m.duration) || 1;
+                                const metaHtml = dur > 1 
+                                    ? `<span><i class="far fa-clock mr-0.5"></i> ${dur}m</span><span class="font-bold bg-[#133B34]/10 px-1 rounded text-[7px] truncate max-w-[80%]">${m.id}</span>`
+                                    : `<span class="font-bold bg-[#133B34]/10 px-1 rounded text-[7px] truncate max-w-full">${m.id}</span>`;
+
                                 return `
                                     <div id="bar-${m.id}" 
                                          onclick="inspectMilestone('${m.id}')" 
-                                         class="milestone-bar p-2.5 mx-1.5 rounded-lg border-l-4 ${m.borderStyle} flex flex-col justify-center" 
+                                         class="milestone-bar p-2 rounded-lg border-l-4 ${m.borderStyle} flex flex-col justify-center cursor-pointer shadow-sm overflow-hidden" 
                                          data-theme="${m.theme}"
-                                         style="grid-row: ${m.renderRow}; grid-column: ${m.startSlot} / span ${m.duration}; height: 100%; min-height: 42px;">
-                                        <div class="font-bold text-[10px] text-[#133B34] tracking-tight truncate leading-tight">${m.name}</div>
-                                        <div class="text-[8px] text-[#636466] mt-1 font-mono flex justify-between items-center opacity-90">
-                                            <span><i class="far fa-clock mr-0.5 text-[9px] text-[#00856C]"></i> ${m.duration}m</span>
-                                            <span class="font-bold bg-[#133B34]/10 text-[#133B34] px-1 rounded text-[7px]">${m.id}</span>
+                                         style="grid-row: ${m.renderVerticalRow}; grid-column: ${startPos} / span ${dur}; min-height: 44px; width: ${Math.max(42, dur * 50 - 8)}px;">
+                                        <div class="font-bold text-[10px] text-[#133B34] tracking-tight truncate leading-tight milestone-title w-full">${m.name}</div>
+                                        <div class="text-[8px] text-[#636466] mt-0.5 font-mono flex justify-between items-center opacity-90 milestone-meta w-full">
+                                            ${metaHtml}
                                         </div>
                                     </div>
                                 `;
@@ -333,18 +448,30 @@
             container.innerHTML = outputHtml;
         }
 
+        // Track the currently active theme to allow toggling off
+        let currentActiveTheme = 'all';
+
         function filterTheme(themeId) {
+            // If clicking the already active theme, toggle it back to 'all'
+            if (currentActiveTheme === themeId && themeId !== 'all') {
+                themeId = 'all';
+            }
+            currentActiveTheme = themeId;
+
+            // Reset all buttons
             document.querySelectorAll('.theme-filter-wrapper button, #btn-all').forEach(btn => {
                 btn.classList.remove('bg-[#133B34]', 'text-white');
                 btn.classList.add('bg-white', 'text-[#133B34]');
             });
             
+            // Set active button styles
             const activeBtn = document.getElementById(`btn-${themeId}`);
             if (activeBtn) {
                 activeBtn.classList.remove('bg-white', 'text-[#133B34]');
                 activeBtn.classList.add('bg-[#133B34]', 'text-white');
             }
 
+            // Dim or highlight the milestone cards
             document.querySelectorAll('.milestone-bar').forEach(card => {
                 if (themeId === 'all' || card.getAttribute('data-theme') === themeId) {
                     card.classList.remove('dimmed');
@@ -390,30 +517,39 @@
             if (!selectedNode) return;
 
             document.getElementById(`bar-${targetId}`).classList.add('dependency-source');
+            
+            const matchedUpstreamDeps = upstreamLinkRegistry[targetId] || [];
+
             document.querySelectorAll('.milestone-bar').forEach(card => {
                 const innerId = card.id.replace('bar-', '');
-                if (innerId !== targetId && !(selectedNode.deps || []).includes(innerId)) {
+                if (innerId !== targetId && !matchedUpstreamDeps.includes(innerId)) {
                     card.classList.add('dimmed');
-                } else if ((selectedNode.deps || []).includes(innerId)) {
+                } else if (matchedUpstreamDeps.includes(innerId)) {
                     card.classList.add('dependency-target');
                 }
             });
 
             const subtaskElements = (selectedNode.subtasks || []).map(task => {
-                return `<li class="flex items-start gap-2 text-xs text-[#212721] font-medium bg-gray-50 p-2.5 rounded border border-gray-200">
-                    <i class="fas fa-angle-right text-[#00856C] mt-0.5"></i>
-                    <span>${task}</span>
-                </li>`;
+                return '<li class="flex items-start gap-2.5 text-xs text-[#212721] font-medium bg-gray-50 p-2.5 rounded border border-gray-200 shadow-sm">' +
+                    '<span class="inline-block w-1.5 h-1.5 bg-[#00856C] rounded-full mt-1.5 flex-shrink-0"></span>' +
+                    '<span>' + task + '</span>' +
+                '</li>';
             }).join('');
 
-            const dependencyItems = (selectedNode.deps || []).map(depId => {
-                return `<li class="flex items-center gap-2 text-rose-700 font-semibold bg-rose-50 p-2 rounded border border-rose-200">
-                    <i class="fas fa-link text-[#00856C]"></i> Cannot finalize until milestone [${depId}] concludes.
-                </li>`;
+            const dependencyItems = matchedUpstreamDeps.map(depId => {
+                return '<li class="flex items-center gap-2.5 text-[#1ED75F] font-semibold bg-[#133B34] p-3 rounded-lg border border-[#00856C] shadow-md">' +
+                    '<i class="fas fa-link text-[#1ED75F]"></i>' +
+                    '<span>Cannot proceed until milestone [' + depId + '] concludes.</span>' +
+                '</li>';
             }).join('');
 
-            const startMonth = selectedNode.startSlot;
-            const endMonth = selectedNode.startSlot + selectedNode.duration - 1;
+            const startMonth = parseFinance(selectedNode.startSlot) || 1;
+            const duration = parseFinance(selectedNode.duration) || 1;
+            const endMonth = startMonth + duration - 1;
+            
+            const minVal = parseFinance(selectedNode.minCost);
+            const maxVal = parseFinance(selectedNode.maxCost);
+            const displayCost = maxVal > 0 ? `$${minVal.toLocaleString()} - $${maxVal.toLocaleString()}` : "Internal Staging Allocation";
 
             const rootPanel = document.getElementById('detail-panel-root');
             rootPanel.innerHTML = `
@@ -427,24 +563,35 @@
                     </button>
                 </div>
 
-                <div class="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                <div class="mb-4 bg-white p-3 rounded-lg border border-gray-200 shadow-sm">
                     <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 small-caps">Functional Objective Focus</h4>
                     <p class="text-xs text-[#636466] leading-relaxed font-medium">${selectedNode.desc}</p>
                 </div>
 
-                <div class="text-xs text-[#636466] mb-4 font-medium flex gap-4 bg-white p-2 rounded border border-gray-200">
-                    <span><i class="far fa-clock mr-1 text-gray-400"></i> Active: <span class="text-[#00856C] font-bold">${selectedNode.duration} Months</span></span>
-                    <span><i class="far fa-calendar-alt mr-1 text-gray-400"></i> Timeline: <span class="text-amber-600 font-bold">M${startMonth} → M${endMonth}</span></span>
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-[#133B34]/5 p-3 rounded-lg border border-[#00856C]/10 shadow-sm">
+                        <h4 class="text-[9px] font-bold text-[#133B34] uppercase small-caps mb-0.5">External Vendor Cost</h4>
+                        <div class="text-xs font-bold text-[#00856C]">${displayCost}</div>
+                    </div>
+                    <div class="bg-[#133B34]/5 p-3 rounded-lg border border-[#00856C]/10 shadow-sm">
+                        <h4 class="text-[9px] font-bold text-[#133B34] uppercase small-caps mb-0.5">Estimated Resource Load</h4>
+                        <div class="text-xs font-bold text-[#00856C]">${parseFinance(selectedNode.fteHours)} FTE Hours</div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-[#133B34] mb-4 font-medium flex gap-4 bg-white p-2 rounded border border-gray-200 shadow-sm">
+                    <span><i class="far fa-clock mr-1 text-gray-400"></i> Active: <span class="text-[#00856C] font-bold">${duration} Months</span></span>
+                    <span><i class="far fa-calendar-alt mr-1 text-gray-400"></i> Timeline: <span class="text-[#133B34] font-bold">M${startMonth} → M${endMonth}</span></span>
                 </div>
 
                 <div class="mb-5 bg-[#133B34]/5 p-4 rounded-xl border border-[#00856C]/20">
                     <h4 class="text-[10px] font-bold text-[#133B34] uppercase tracking-wider mb-3 small-caps"><i class="fas fa-tasks text-[#00856C] mr-1"></i> Essential Project Tasks</h4>
-                    <ul class="space-y-2">${subtaskElements || '<span class="text-gray-400 italic">No specific subtasks mapped.</span>'}</ul>
+                    <ul class="space-y-2">${subtaskElements}</ul>
                 </div>
 
                 <div>
-                    <h4 class="text-[10px] font-bold text-[#133B34] uppercase tracking-wider mb-2 small-caps"><i class="fas fa-project-diagram text-[#00856C] mr-1"></i> Execution Blocker Criteria</h4>
-                    ${(selectedNode.deps || []).length > 0 ? `<ul class="space-y-2 text-xs">${dependencyItems}</ul>` : `<p class="text-xs text-gray-400 italic bg-gray-50 p-3 rounded text-center border border-dashed">No active cross-functional blockers identified for this track path.</p>`}
+                    <h4 class="text-[10px] font-bold text-[#133B34] uppercase tracking-wider mb-2.5 small-caps"><i class="fas fa-project-diagram text-[#00856C] mr-1"></i> Dependencies</h4>
+                    ${matchedUpstreamDeps.length > 0 ? `<ul class="space-y-2 text-xs">${dependencyItems}</ul>` : `<p class="text-xs text-gray-400 italic bg-white p-3 rounded text-center border border-dashed shadow-sm">No active cross-functional blockers identified for this track path.</p>`}
                 </div>
             `;
         }
@@ -461,14 +608,38 @@
             
             document.getElementById(`header-period-${periodId}`).classList.add('active-header', 'bg-emerald-500/10');
             
-            const dataPhase = businessMaturityPhases[periodId] || { text: "No summary provided for this phase." };
+            const dataPhase = businessMaturityPhases[periodId] || { text: "Long-term operational scale and continuous optimization phase." };
+            
+            // Define the exact start and end months of the selected phase
             const startRange = ((periodId - 1) * 6) + 1;
             const endRange = periodId * 6;
             const periodItems = [];
+            
+            let totalMinCost = 0;
+            let totalMaxCost = 0;
+            let totalFteHours = 0;
 
             proportionalRoadmapData.forEach(r => {
                 (r.items || []).forEach(m => {
-                    if (m.startSlot >= startRange && m.startSlot <= endRange) {
+                    const startMonth = parseFinance(m.startSlot);
+                    const duration = parseFinance(m.duration) || 1;
+                    const endMonth = startMonth + duration - 1;
+                    
+                    // Check if the milestone overlaps with the current phase at all
+                    if (startMonth <= endRange && endMonth >= startRange) {
+                        
+                        // Calculate exactly how many months of this milestone fall inside THIS specific phase
+                        const overlapStart = Math.max(startMonth, startRange);
+                        const overlapEnd = Math.min(endMonth, endRange);
+                        const overlapDuration = overlapEnd - overlapStart + 1;
+                        
+                        // Create a percentage ratio to pro-rate the budget and FTEs
+                        const overlapRatio = overlapDuration / duration;
+
+                        totalMinCost += parseFinance(m.minCost) * overlapRatio;
+                        totalMaxCost += parseFinance(m.maxCost) * overlapRatio;
+                        totalFteHours += parseFinance(m.fteHours) * overlapRatio;
+                        
                         periodItems.push({ track: r.focusName, ...m });
                     }
                 });
@@ -479,26 +650,37 @@
                 <div class="bg-[#133B34] text-white p-4 rounded-lg mb-5 shadow-md flex justify-between items-center">
                     <div>
                         <div class="text-[9px] uppercase tracking-widest text-[#1ED75F] font-bold small-caps mb-0.5">Timeline Segment</div>
-                        <h2 class="text-xl font-medium tracking-tight">Transformation Status</h2>
+                        <h2 class="text-xl font-medium tracking-tight">Phase Financials Rollup</h2>
                     </div>
                     <button onclick="resetInspector()" class="text-xs bg-white/10 hover:bg-white/20 text-white px-2 py-1 rounded border border-white/20 transition">
-                        <i class="fas fa-times-circle text-[#1ED75F] mr-1"></i> Reset
+                        <i class="fas fa-times-circle text-[#1ED75F] mr-1"></i> Close
                     </button>
                 </div>
 
-                <div class="mb-5 text-xs text-[#636466] leading-relaxed bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div class="grid grid-cols-2 gap-3 mb-5">
+                    <div class="bg-[#133B34]/5 p-3 rounded-lg border border-[#00856C]/20 shadow-sm">
+                        <h4 class="text-[10px] font-bold text-[#133B34] uppercase small-caps mb-0.5">Aggregated Phase Cost</h4>
+                        <div class="text-xs font-bold text-[#00856C]">$${Math.round(totalMinCost).toLocaleString()} - $${Math.round(totalMaxCost).toLocaleString()}</div>
+                    </div>
+                    <div class="bg-[#133B34]/5 p-3 rounded-lg border border-[#00856C]/20 shadow-sm">
+                        <h4 class="text-[10px] font-bold text-[#133B34] uppercase small-caps mb-0.5">Cumulative Workload</h4>
+                        <div class="text-xs font-bold text-[#00856C]">${Math.round(totalFteHours).toLocaleString()} FTE Hours</div>
+                    </div>
+                </div>
+
+                <div class="mb-5 text-xs text-[#636466] leading-relaxed bg-white p-4 rounded-lg border border-gray-200 shadow-sm italic">
                     "${dataPhase.text}"
                 </div>
 
                 <div>
-                    <h4 class="text-[10px] font-bold text-[#133B34] uppercase tracking-wider mb-3 small-caps"><i class="fas fa-clipboard-list text-[#00856C] mr-1"></i> Active Period Tasks Matrix</h4>
+                    <h4 class="text-[10px] font-bold text-[#133B34] uppercase tracking-wider mb-3 small-caps"><i class="fas fa-clipboard-list text-[#00856C] mr-1"></i> Active Phase Milestones Matrix</h4>
                     <div class="space-y-3 max-h-[280px] overflow-y-auto pr-1">
                         ${periodItems.map(item => `
                             <div class="p-3 bg-white border border-gray-200 rounded-lg shadow-sm">
                                 <div class="text-[9px] font-bold text-gray-400 uppercase small-caps mb-1">${item.track}</div>
                                 <div class="text-xs font-semibold text-[#133B34] mb-2">${item.name}</div>
                                 <div class="pl-2 border-l-2 border-[#00856C] space-y-1.5">
-                                    ${(item.subtasks || []).map(t => `<div class="text-[11px] text-[#212721] font-medium flex items-start gap-1"><i class="fas fa-angle-right text-[#00856C] text-[10px] mt-0.5"></i> <span>${t}</span></div>`).join('')}
+                                    ${(item.subtasks || []).map(t => `<div class="text-[11px] text-[#212721] font-medium flex items-start gap-2"><span class="inline-block w-1.5 h-1.5 bg-[#00856C] rounded-full mt-1.5 flex-shrink-0"></span> <span>${t}</span></div>`).join('')}
                                 </div>
                             </div>
                         `).join('')}
@@ -521,9 +703,18 @@
             if (!selectedTrack) return;
 
             document.querySelectorAll('.milestone-bar').forEach(card => {
-                if (!(selectedTrack.items || []).some(i => `bar-${i.id}` === card.id)) {
+                if (!selectedTrack.items.some(i => `bar-${i.id}` === card.id)) {
                     card.classList.add('dimmed');
                 }
+            });
+
+            let trackMinCost = 0;
+            let trackMaxCost = 0;
+            let trackFteHours = 0;
+            selectedTrack.items.forEach(m => {
+                trackMinCost += parseFinance(m.minCost);
+                trackMaxCost += parseFinance(m.maxCost);
+                trackFteHours += parseFinance(m.fteHours);
             });
 
             const rootPanel = document.getElementById('detail-panel-root');
@@ -537,19 +728,30 @@
                         <i class="fas fa-times-circle text-[#00856C] mr-1"></i> Close
                     </button>
                 </div>
+
+                <div class="grid grid-cols-2 gap-3 mb-5">
+                    <div class="bg-[#133B34]/5 p-3 rounded-lg border border-[#00856C]/20 shadow-sm">
+                        <h4 class="text-[10px] font-bold text-[#133B34] uppercase small-caps mb-0.5">Total Track Cost</h4>
+                        <div class="text-xs font-bold text-[#00856C]">$${trackMinCost.toLocaleString()} - $${trackMaxCost.toLocaleString()}</div>
+                    </div>
+                    <div class="bg-[#133B34]/5 p-3 rounded-lg border border-[#00856C]/20 shadow-sm">
+                        <h4 class="text-[10px] font-bold text-[#133B34] uppercase small-caps mb-0.5">Track Resources Allocation</h4>
+                        <div class="text-xs font-bold text-[#00856C]">${trackFteHours} Hours</div>
+                    </div>
+                </div>
                 
-                <p class="text-xs text-[#636466] leading-relaxed mb-5 bg-gray-50 p-3 rounded border border-gray-200">${selectedTrack.trackDesc}</p>
+                <p class="text-xs text-[#636466] leading-relaxed mb-5 bg-white p-3 rounded border border-gray-200 shadow-sm font-medium">${selectedTrack.trackDesc}</p>
 
                 <h4 class="text-[10px] font-bold text-[#133B34] uppercase tracking-wider mb-3 small-caps"><i class="fas fa-stream text-[#00856C] mr-1"></i> Full Track Tasks Rollup</h4>
-                <div class="space-y-4 max-h-[300px] overflow-y-auto pr-1">
-                    ${(selectedTrack.items || []).map(item => `
-                        <div class="p-3 bg-white border border-gray-100 rounded-lg shadow-sm border-l-4 ${item.borderStyle}">
+                <div class="space-y-4 max-h-[260px] overflow-y-auto pr-1">
+                    ${selectedTrack.items.map(item => `
+                        <div class="p-3 bg-white border border-gray-100 rounded-lg shadow-sm border-l-4 border-l-[#133B34]">
                             <div class="text-xs font-bold text-[#133B34] flex justify-between">
                                 <span>${item.name}</span>
                                 <span class="text-[9px] font-mono text-gray-400">${item.id}</span>
                             </div>
                             <ul class="mt-2 space-y-1.5 border-t pt-2 border-gray-100">
-                                ${(item.subtasks || []).map(t => `<li class="text-[11px] text-[#212721] font-medium flex items-start gap-1.5"><i class="fas fa-angle-right text-[#00856C] text-[10px] mt-0.5"></i> <span>${t}</span></li>`).join('')}
+                                ${(item.subtasks || []).map(t => `<li class="text-[11px] text-[#212721] font-medium flex items-start gap-2"><span class="inline-block w-1.5 h-1.5 bg-[#00856C] rounded-full mt-1.5 flex-shrink-0"></span> <span>${t}</span></li>`).join('')}
                             </ul>
                         </div>
                     `).join('')}
@@ -557,6 +759,8 @@
             `;
         }
 
+        // Initialize dynamic build
+        generateTimelineHeaders();
         generateMaturityCanvas();
     </script>
 </body>
